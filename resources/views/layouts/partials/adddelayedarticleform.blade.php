@@ -1,3 +1,4 @@
+<div class="container">
 <form method="POST" action="{{ route('delayed.store') }}">
         @csrf
         <x-label-text name="title" label="Title:">{{old('title')}}</x-label-text>
@@ -20,5 +21,6 @@
         <x-error-msg>{{$message}}</x-error-msg> 
         @enderror
         <br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn btn-primary">
 </form>
+</div>

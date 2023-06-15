@@ -1,5 +1,5 @@
 import 'bootstrap';
-require('bootstrap/dist/js/bootstrap.bundle');
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -8,7 +8,7 @@ require('bootstrap/dist/js/bootstrap.bundle');
 
 import axios from 'axios';
 window.axios = axios;
-window._ = require('lodash');
+
 import _ from 'lodash';
 window._ = _;
 
@@ -17,12 +17,7 @@ import $ from 'jquery';
 window.$ = $;
 
 import 'bootstrap';
-try {
-    window.$ = require('jquery');
-    window.bootstrap = require('bootstrap');
-} catch (e) {
-    console.error(e);
-}
+
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

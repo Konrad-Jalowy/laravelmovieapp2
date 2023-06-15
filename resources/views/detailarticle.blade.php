@@ -4,16 +4,8 @@
 <p><strong>{{ session('message') }}</strong></p>
 @else
 @endif
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="toast-header">
-    <img src="..." class="rounded me-2" alt="...">
-    <strong class="me-auto">API Link</strong>
-    <small>JSON format</small>
-    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-  <div class="toast-body">
-    View this article in our API: <a href="{{route('api.detail.article', $article->id)}}" class="link-primary">Click here</a>
-  </div>
+<div class="text-center mb-3">
+<a href="{{route('api.detail.article', $article->id)}}" class="btn btn-primary">API LINK</a>
 </div>
     <div class="card text-center">
             <div class="card-header">
@@ -32,32 +24,19 @@
             </div>
             </div>
     @if($article->answersCount == 0)
-        <p>There is no answers to this article!</p>
+
     @else
-    <h3>Answers:</h3>
-    @endif
-        @foreach ($article->answers as $answer)
+    <div class="card-group">
+    @foreach ($article->answers as $answer)
                 @yourAnswer($answer)
                 <x-answer author="You" content="{{$answer->content}}" id1="{{$article->id}}" id2="{{$answer->id}}"></x-answer>
                 @else
                 <x-answer author="{{$answer->author}}" content="{{$answer->content}}" id1="{{$article->id}}" id2="{{$answer->id}}" ></x-answer>
                 @endyourAnswer 
         @endforeach
+    </div>
+    
+    @endif
+       
 @endsection
 
-<script>
-    
-    function defer(method) {
-    if (window.jQuery) {
-        method();
-    } else {
-        setTimeout(function() { defer(method) }, 50);
-    }
-}
-
-defer(function () {
-  console.log('hello');
-  $('.toast').toast('show');
-});
-    
-</script>

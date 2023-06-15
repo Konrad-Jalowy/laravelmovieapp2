@@ -1,3 +1,3 @@
-<div>
-<p><strong>{{$slot}}</strong></p>
+<div class="invalid-feedback">
+{{$slot}}
 </div>

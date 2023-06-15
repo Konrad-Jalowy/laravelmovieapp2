@@ -1,3 +1,4 @@
+<div class="container">
 <form method="POST" action="{{ route('article.store') }}">
         @csrf
         <x-label-text name="title" label="Title:">{{old('title')}}</x-label-text>
@@ -18,3 +19,4 @@
         <br>
         <input type="submit" value="Submit">
 </form>
+</div>
