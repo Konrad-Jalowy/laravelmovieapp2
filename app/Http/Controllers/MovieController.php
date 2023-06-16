@@ -8,6 +8,7 @@ use App\Models\Movie;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Director;
+use App\Http\Requests\StoreMovieRequest;
 class MovieController extends Controller
 {
     public function addMovieForm(){
@@ -23,8 +24,9 @@ class MovieController extends Controller
    
     }
 
-    public function storeMovie(Request $request) {
+    public function storeMovie(StoreMovieRequest $request) {
         $user = Auth::user();
+        $request->validated();
         $movie = new Movie();
         $director = Director::findOrFail($request['director']);
         $movie->title= $request['title'];
@@ -68,7 +70,8 @@ class MovieController extends Controller
 
     public function getMoviesWithCategory($category_id){
         $movies = Movie::where('category_id', $category_id)->get();
-        return view('categorymovielist', compact('movies'));
+        $category = Category::findOrFail($category_id);
+        return view('categorymovielist', compact('movies', 'category'));
     }
 
     public function APIgetMoviesWithCategory($category_id){
@@ -81,6 +84,46 @@ public function displayMoviesbyGrade(){
     $movies = Movie::orderBy('grade', 'desc')->get();
 
     return view('movielistgrade', compact('movies'));
+   
+}
+
+public function displayMoviesWorst(){
+    // $movies = Movie::all()->sortByDesc('grade');
+    $movies = Movie::orderBy('grade', 'asc')->get();
+
+    return view('movieworst', compact('movies'));
+   
+}
+
+public function displayMoviesLongsest(){
+    // $movies = Movie::all()->sortByDesc('grade');
+    $movies = Movie::orderBy('movie_length', 'desc')->get();
+
+    return view('movielistlongest', compact('movies'));
+   
+}
+
+public function displayMoviesShortest(){
+    // $movies = Movie::all()->sortByDesc('grade');
+    $movies = Movie::orderBy('movie_length', 'asc')->get();
+
+    return view('movielistshortest', compact('movies'));
+   
+}
+
+public function displayMoviesOldest(){
+    // $movies = Movie::all()->sortByDesc('grade');
+    $movies = Movie::orderBy('date_of_publishing', 'asc')->get();
+
+    return view('movieoldest', compact('movies'));
+   
+}
+
+public function displayMoviesNewest(){
+    // $movies = Movie::all()->sortByDesc('grade');
+    $movies = Movie::orderBy('date_of_publishing', 'desc')->get();
+
+    return view('movienewest', compact('movies'));
    
 }
 
@@ -100,8 +143,9 @@ public function editMovieForm($id){
 
 }
 
-public function editStoreMovie(Request $request, $id) {
+public function editStoreMovie(StoreMovieRequest $request, $id) {
     $user = Auth::user();
+    $request->validated();
     $movie = Movie::findOrFail($id);
     $director = Director::findOrFail($request['director']);
     $movie->title= $request['title'];
@@ -118,7 +162,7 @@ public function editStoreMovie(Request $request, $id) {
 }
 
 public function displayCategories(){
-    $categories = Category::all();
+    $categories = Category::withCount('movies')->get();
 
     return view('categorylist', compact('categories'));
    

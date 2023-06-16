@@ -23,7 +23,7 @@ use App\Http\Middleware\CheckExistenceMiddleware;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/movie');
 });
 
 Route::get('/app', function(){
@@ -43,6 +43,11 @@ Route::prefix('movie')->group(function(){
     Route::post("/{id}/edit", [MovieController::class, 'editStoreMovie'])->whereNumber('id')->name('movie.editStore');
     Route::delete("/{id}", [MovieController::class, 'deleteMovie'])->whereNumber('id');
     Route::get("/bygrade", [MovieController::class, 'displayMoviesByGrade'])->name('movie.best');
+    Route::get("/worst", [MovieController::class, 'displayMoviesWorst'])->name('movie.worst');
+    Route::get("/longest", [MovieController::class, 'displayMoviesLongsest'])->name('movie.longest');
+    Route::get("/shortest", [MovieController::class, 'displayMoviesShortest'])->name('movie.shortest');
+    Route::get("/oldest", [MovieController::class, 'displayMoviesOldest'])->name('movie.oldest');
+    Route::get("/newest", [MovieController::class, 'displayMoviesNewest'])->name('movie.newest');
     Route::get("/", [MovieController::class, 'displayMovies'])->name('movielist');
     
 
@@ -65,6 +70,7 @@ Route::prefix('article')->group(function(){
     Route::get('/byuser/{id}', [ArticleController::class, 'displayUserArticles']);
     Route::get("/byviews", [ArticleController::class, 'displayArticlesByViews'])->name('article.byviews');
     Route::get("/byanswers", [ArticleController::class, 'displayArticlesByAnswers'])->name('article.byanswers');
+    Route::get("/bydate", [ArticleController::class, 'displayArticlesByDate'])->name('article.bydate');
     Route::get("/", [ArticleController::class, 'displayArticles'])->name('articlelist');
     
 

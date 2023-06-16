@@ -38,6 +38,11 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{route('movielist')}}">Movies</a></li>
                                 <li><a class="dropdown-item" href="{{route('movie.best')}}">Best movies</a></li>
+                                <li><a class="dropdown-item" href="{{route('movie.worst')}}">Worst movies</a></li>
+                                <li><a class="dropdown-item" href="{{route('movie.longest')}}">Longest movies</a></li>
+                                <li><a class="dropdown-item" href="{{route('movie.shortest')}}">Shortest movies</a></li>
+                                <li><a class="dropdown-item" href="{{route('movie.oldest')}}">Oldest movies:</a></li>
+                                <li><a class="dropdown-item" href="{{route('movie.newest')}}">Newest movies:</a></li>
                                 <li><a class="dropdown-item" href="{{route('categorylist')}}">Categories</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{route('movie.add')}}">Add movie</a></li>
@@ -50,7 +55,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{route('articlelist')}}">Articles</a></li>
-                                <li><a class="dropdown-item" href="{{route('article.add')}}">Latest</a></li>
+                                <li><a class="dropdown-item" href="{{route('article.bydate')}}">Latest</a></li>
                                 <li><a class="dropdown-item" href="{{route('article.byviews')}}">Most viewed</a></li>
                                 <li><a class="dropdown-item" href="{{route('article.byanswers')}}">Most answered</a></li>
                                 <li><hr class="dropdown-divider"></li>
@@ -65,10 +70,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{route('directorlist')}}">Directors</a></li>
-                                <li><a class="dropdown-item" href="{{route('actor.add')}}">Actors</a></li>
+                                <li><a class="dropdown-item" href="{{route('actorlist')}}">Actors</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{route('director.add')}}">Add director</a></li>
-                                <li><a class="dropdown-item" href="{{route('actorlist')}}">Add actor</a></li>
+                                <li><a class="dropdown-item" href="{{route('actor.add')}}">Add actor</a></li>
                             </ul>
                             </li>
                     </ul>

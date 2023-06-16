@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Actor;
 use App\Models\User;
+use App\Http\Requests\StoreActorRequest;
 class ActorController extends Controller
 {
     public function addActorForm(){
@@ -13,8 +14,9 @@ class ActorController extends Controller
    
     }
 
-    public function storeActor(Request $request) {
-        $user = User::findOrFail(Auth::id());
+    public function storeActor(StoreActorRequest $request) {
+        $user = Auth::user();
+        $request->validated();
         $actor = new Actor();
         $actor->name= $request['name'];
         $actor->date_of_birth = $request['date_of_birth'];
@@ -51,8 +53,8 @@ class ActorController extends Controller
         return view('editactorform', compact('actor'));
     }
 
-    public function editStoreActor(Request $request, $id) {
-        $user = User::find(Auth::id());
+    public function editStoreActor(StoreActorRequest $request, $id) {
+        $request->validated();
         $actor = Actor::findOrFail($id);
         $actor->name= $request['name'];
         $actor->date_of_birth = $request['date_of_birth'];

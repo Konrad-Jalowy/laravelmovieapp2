@@ -1,11 +1,27 @@
 @extends('layouts.app')
 @section('content')
-    <h1>Menu</h1>
-    <a href="{{route('articlelist')}}"><button>Home</button></a>
-    <a href="{{route('article.add')}}"><button>Add article</button></a>
-    <a href="{{route('article.byviews')}}"><button>By views</button></a>
-    <a href="{{route('article.byanswers')}}"><button>By answers</button></a>
-    
-<h3>Article list</h3>
-@each('layouts.partials.listeddelayedarticle', $articles , 'article' )
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+    <th scope="col">ID</th>  
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Created At</th>
+      <th scope="col">Will be published in</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($articles as $article)
+    <tr>
+      <th scope="row">{{$article->id}}</th>
+      <td>{{ $article->title }}</td>
+      <td>{{ $article->author }}</td>
+      <td>{{$article->created_at}} ({{ Carbon\Carbon::parse($article->created_at)->diffForHumans()}}) </td>
+      <td>{{$article->publish_date}} ({{ Carbon\Carbon::parse($article->publish_date)->diffForHumans()}})</td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+</div>
 @endsection

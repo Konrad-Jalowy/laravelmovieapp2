@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Director;
 use App\Models\User;
+use App\Http\Requests\StoreDirectorRequest;
 class DirectorController extends Controller
 {
     public function addDirectorForm(){
@@ -13,8 +14,9 @@ class DirectorController extends Controller
    
     }
 
-    public function storeDirector(Request $request) {
+    public function storeDirector(StoreDirectorRequest $request) {
         $user = Auth::user();
+        $request->validated();
         $director = new Director();
         $director->name= $request['name'];
         $director->date_of_birth = $request['date_of_birth'];
@@ -33,7 +35,7 @@ class DirectorController extends Controller
 
     public function detailDirector($id){
         // $director = Director::find($id);
-        $director = Director::with('movies')->findOrFail($id);
+        $director = Director::with('movies')->withCount('movies')->findOrFail($id);
         return view('detaildirector', compact('director'));
     }
 
@@ -53,8 +55,9 @@ class DirectorController extends Controller
         return view('editdirectorform', compact('director'));
     }
 
-    public function editStoreDirector(Request $request, $id) {
+    public function editStoreDirector(StoreDirectorRequest $request, $id) {
         $user = Auth::user();
+        $request->validated();
         $director = Director::findOrFail($id);
         $director->name= $request['name'];
         $director->date_of_birth = $request['date_of_birth'];

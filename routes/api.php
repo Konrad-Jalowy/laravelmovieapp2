@@ -37,7 +37,7 @@ Route::get('/', function(){
 })->middleware(SaveIPMiddleware::class);
 Route::prefix('article')->group(function(){
 
-    Route::get("/", [ArticleController::class, 'APIdisplayArticles']);
+    Route::get("/", [ArticleController::class, 'APIdisplayArticles'])->name('apiarticles');
     
     Route::get("/{id}", [ArticleController::class, 'APIdetailArticle'])->whereNumber('id')->name('api.detail.article');
 
@@ -72,8 +72,8 @@ Route::prefix('user')->group(function(){
 
 
 Route::prefix('actor')->group(function(){
-    Route::get("/", [ActorController::class, 'APIdisplayActors']);
-    Route::get("/{id}", [ActorController::class, 'APIdetailActor']);
+    Route::get("/", [ActorController::class, 'APIdisplayActors'])->name('apiactors');
+    Route::get("/{id}", [ActorController::class, 'APIdetailActor'])->name('apiactor');
 
 });
 
@@ -84,8 +84,8 @@ Route::prefix('director')->group(function(){
     // Route::get("/{id}", function($id){
     //     return "director by $id";
     // });
-    Route::get("/", [DirectorController::class, 'APIdisplayDirectors']);
-    Route::get("/{id}", [DirectorController::class, 'APIdetailDirector']);
+    Route::get("/", [DirectorController::class, 'APIdisplayDirectors'])->name('apidirectors');
+    Route::get("/{id}", [DirectorController::class, 'APIdetailDirector'])->name('apidirector');
     
 
 });
@@ -97,8 +97,8 @@ Route::prefix('movie')->group(function(){
     // Route::get("/{id}", function($id){
     //     return "movie by $id";
     // });
-    Route::get("/", [MovieController::class, 'APIdisplayMovies']);
-    Route::get("/{id}", [MovieController::class, 'APIdetailMovie'])->whereNumber('id');
+    Route::get("/", [MovieController::class, 'APIdisplayMovies'])->name('apimovies');
+    Route::get("/{id}", [MovieController::class, 'APIdetailMovie'])->whereNumber('id')->name('apimovie');
     Route::get('/bycategory/{id}', [MovieController::class, 'APIgetMoviesWithCategory']);
     Route::get('/bygrade', [MovieController::class, 'APIdisplayMoviesbyGrade']);
     

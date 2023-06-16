@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 <div class="text-center mb-3">
-<h3>Best movies:</h3>
+<h3>Worst movies:</h3>
 <a href="{{route('apimovies')}}" class="btn btn-primary">API Movies link</a>
 
 </div>

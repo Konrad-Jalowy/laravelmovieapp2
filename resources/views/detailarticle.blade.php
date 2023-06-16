@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
 @if(session('message'))
-<p><strong>{{ session('message') }}</strong></p>
+<div class="alert alert-success" role="alert">
+{{ session('message') }}
+</div>
 @else
 @endif
 <div class="text-center mb-3">

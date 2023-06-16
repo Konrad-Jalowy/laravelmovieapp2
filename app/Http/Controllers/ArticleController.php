@@ -110,6 +110,11 @@ class ArticleController extends Controller
         return view('editarticleform', compact('article'));
     }
 
+    public function displayArticlesByDate(){
+        $articles = Article::orderBy('created_at', 'desc')->get();
+        return view('articlelistbydate', compact('articles'));
+    }
+
     public function editStoreArticle(StoreArticleRequest $request, $id) {
         $user = Auth::user();
         $request->validated();
